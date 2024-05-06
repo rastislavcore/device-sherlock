@@ -1,95 +1,120 @@
-# @healerlab/device-js
+# Device Sherlock
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![License][license-src]][license-href]
-[![Standard JS][standard-js-src]][standard-js-href]
+Powerful, lightweight device detector module.
 
-### Available for Javascript, Typescript, Vue, React and Angular
+## Available for Javascript, Typescript, Vue, React and Angular
 
-## Setup
-```bash
-npm i @healerlab/device-js
-```
+## Installation
 
-with pnpm:
+NPM:
 
 ```bash
-pnpm add @healerlab/device-js
+npm i device-sherlock
 ```
 
-with yarn:
+PNPM:
 
 ```bash
-yarn add @healerlab/device-js
+pnpm add device-sherlock
 ```
 
-Add it to your file or component:
+Yarn:
 
-```js
-import { detectDevice } from '@healerlab/device-js'
+```bash
+yarn add device-sherlock
 ```
 
-or 
-```js
-import pkg from '@healerlab/device-js';
-const { detectDevice } = pkg;
+## Use
+
+```ts
+import { deviceSherlock } from 'device-sherlock';
 ```
 
-That's it, you can now use `detectDevice` in your app ✨
+or:
+
+```ts
+import pkg from 'device-sherlock';
+const { deviceSherlock } = pkg;
+```
+
+That's it, you can now use `deviceSherlock` in your app ✨
 
 ## Flags
 
 You can use these flags to detect the device type.
 
 ```js
-detectDevice.isDesktop
-detectDevice.isMobile
-detectDevice.isTablet
-detectDevice.isMobileOrTablet
-detectDevice.isDesktopOrTablet
-detectDevice.isIos
-detectDevice.isWindows
-detectDevice.isMacOS
-detectDevice.isApple
-detectDevice.isAndroid
-detectDevice.isFirefox
-detectDevice.isEdge
-detectDevice.isChrome
-detectDevice.isSafari
-detectDevice.isSamsung
-detectDevice.isCrawler
-detectDevice.userAgent
+deviceSherlock.isDesktop
+deviceSherlock.isMobile
+deviceSherlock.isTablet
+deviceSherlock.isMobileOrTablet
+deviceSherlock.isDesktopOrTablet
+deviceSherlock.isIos
+deviceSherlock.isWindows
+deviceSherlock.isMacOS
+deviceSherlock.isApple
+deviceSherlock.isAndroid
+deviceSherlock.isFirefox
+deviceSherlock.isEdge
+deviceSherlock.isChrome
+deviceSherlock.isSafari
+deviceSherlock.isSamsung
+deviceSherlock.isCrawler
+deviceSherlock.isUnknown
+deviceSherlock.isCloudFront
+deviceSherlock.isCloudflare
+deviceSherlock.userAgent
 ```
 
-The user agent is also injected an accessible with `detectDevice.userAgent`.
+The user agent is also injected an accessible with `deviceSherlock.userAgent`.
+
+## Settings
+
+You can set the user agent manually.
+
+```ts
+deviceSherlock.setUserAgent('Mozilla/5.0 (Linux; Android 10; SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.181 Mobile Safari/537.36');
+```
+
+You can define headers manually.
+
+```ts
+deviceSherlock.setHeaders({
+  'CF-Device-Type': 'mobile',
+  'CloudFront-Is-Mobile-Viewer': 'true',
+  'CloudFront-Is-Tablet-Viewer': 'false',
+  'CloudFront-Is-Desktop-Viewer': 'false',
+  'CloudFront-Is-Ios-Viewer': 'false',
+  'CloudFront-Is-Android-Viewer': 'true',
+});
+```
 
 ## Usage
 
 ### Vue, React, Angular
 
-You can use detectDevice inside a `script` to access the flags.
+You can use deviceSherlock inside a `script` to access the flags.
 
 ```js
 <script setup>
-import { detectDevice } from '@healerlab/device-js'
-
-// or 
-import pkg from '@healerlab/device-js';
-const { detectDevice } = pkg;
-</script>
+import { deviceSherlock } from 'device-sherlock'
 ```
 
+```js
+import pkg from 'device-sherlock';
+const { deviceSherlock } = pkg;
+</script>
+```
 
 ### Switch a view
 
 ```html
 <template>
   <section>
-    <div v-if="detectDevice.isDesktop">
+    <div v-if="deviceSherlock.isDesktop">
       Desktop
     </div>
-    <div v-else-if="detectDevice.isTablet">
+    <div v-else-if="deviceSherlock.isTablet">
       Tablet
     </div>
     <div v-else>
@@ -101,7 +126,7 @@ const { detectDevice } = pkg;
 
 ## CloudFront Support
 
-If the `user-agent` is `Amazon CloudFront`, this module checks the following headers :  
+If the `user-agent` is `Amazon CloudFront`, this module checks the following headers:
 
 - `CloudFront-Is-Mobile-Viewer`
 - `CloudFront-Is-Tablet-Viewer`
@@ -109,47 +134,26 @@ If the `user-agent` is `Amazon CloudFront`, this module checks the following hea
 - `CloudFront-Is-Ios-Viewer`
 - `CloudFront-Is-Android-Viewer`
 
-Here are the details about the headers:  
-[Amazon CloudFront - Headers for determining the viewer's device type
-](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-cloudfront-headers.html#cloudfront-headers-device-type)  
+Here are the details about the headers: [Amazon CloudFront - Headers for determining the viewer's device type](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-cloudfront-headers.html#cloudfront-headers-device-type).
 
 ### Caution
 
-`isWindows` and `isMacOS` flags are not available with CloudFront.
+`isWindows`, `isLinux` and `isMacOS` flags are not available with CloudFront.
 
 ## Cloudflare Support
 
 This module checks the header `CF-Device-Type`.
 
-Here are the details about the header:
-https://support.cloudflare.com/hc/en-us/articles/229373388-Cache-Content-by-Device-Type-Mobile-Tablet-Desktop-
+Here are the [details about the header](https://support.cloudflare.com/hc/en-us/articles/229373388-Cache-Content-by-Device-Type-Mobile-Tablet-Desktop-).
 
 ## License
 
-[MIT License](./LICENSE)
-
-<!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/dt/@healerlab/device-js.svg?style=flat-square
-[npm-version-href]: https://npmjs.com/package/@healerlab/device-js
-
-[npm-downloads-src]: https://img.shields.io/npm/v/@healerlab/device-js/latest.svg?style=flat-square
-[npm-downloads-href]: https://npmjs.com/package/@healerlab/device-js
-
-[circle-ci-src]: https://img.shields.io/circleci/project/github/nuxt-community/device-module.svg?style=flat-square
-[circle-ci-href]: https://circleci.com/gh/nuxt-community/device-module
-
-[codecov-src]: https://img.shields.io/codecov/c/github/nuxt-community/device-module.svg?style=flat-square
-[codecov-href]: https://codecov.io/gh/nuxt-community/device-module
-
-[standard-js-src]: https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square
-[standard-js-href]: https://standardjs.com
-
-[license-src]: https://img.shields.io/npm/l/@healerlab/device-js.svg?style=flat-square
-[license-href]: https://npmjs.com/package/@healerlab/device-js
+[CORE](LICENSE)
 
 ## Data Source
 
 This module uses [crawler-user-agents](https://github.com/monperrus/crawler-user-agents) to generate the regular expression that detect a crawler.
 
 ## Note
-This module inspired by [@nuxtjs/device](https://github.com/nuxt-modules/device) module
+
+This module inspired by [@healerlab/device-js](https://github.com/healerlab/device-js) module.

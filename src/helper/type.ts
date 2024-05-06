@@ -1,5 +1,5 @@
 export type Device = {
-  userAgent: string
+  userAgent: string | null
   isDesktop: boolean
   isIos: boolean
   isAndroid: boolean
@@ -9,6 +9,7 @@ export type Device = {
   isTablet: boolean
   isWindows: boolean
   isMacOS: boolean
+  isLinux: boolean
   isApple: boolean
   isSafari: boolean
   isFirefox: boolean
@@ -16,4 +17,7 @@ export type Device = {
   isChrome: boolean
   isSamsung: boolean
   isCrawler: boolean
+  isCloudFront: boolean
+  isCloudflare: boolean
+  isUnknown?: boolean
 }
