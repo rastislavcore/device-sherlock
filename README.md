@@ -2,7 +2,9 @@
 
 Powerful, lightweight device detector module.
 
-## Available for Javascript, Typescript, Vue, React and Angular
+> Available for Javascript, Typescript, Vue, React and Angular
+
+Note: This module is not a device detector, it's a device type detector. This module is ECMAScript modules (ESM) only.
 
 ## Installation
 
